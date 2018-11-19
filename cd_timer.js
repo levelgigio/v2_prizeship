@@ -4,20 +4,21 @@ const CD_TIMER_AMOSTRAGEM = 50;
 
 module.exports = class CDTimer {
     constructor(game) {
+        console.log("Criando o cdtimer...");
         this._game = game;
 
         this._label = 'CDTimer';
         this._tempo_restante = null;
         this._duracao = CD_TIMER_DURACAO;
-        this._reference = new Date().getTime();
+        this._reference = new Date();
     }
 
     begin() {
         var now = new Date().getTime();
-        this._tempo_restante = this._duracao + this._reference - now;
+        this._tempo_restante = this._duracao + this._reference.getTime() - now;
 
         if(this._tempo_restante <= 0){
-            this._reference = new Date().getTime();
+            this._reference = new Date();
             this._game.getPoll().closePoll();
         }
         setTimeout(this.begin.bind(this), CD_TIMER_AMOSTRAGEM);
@@ -37,7 +38,7 @@ module.exports = class CDTimer {
                 duration: this._duracao,
                 reference: this._reference,
             },
-        }
+        };
     }
 
 }

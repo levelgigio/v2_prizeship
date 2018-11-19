@@ -4,6 +4,7 @@ const Nave = require('./nave');
 const Saver = require('./saver');
 const Poll = require('./poll');
 const CDTimer = require('./cd_timer');
+const DeadlineTimer = require('./deadline_timer');
 
 module.exports = class Game {
     constructor(database, sockets) {
@@ -12,6 +13,7 @@ module.exports = class Game {
         this._saver = new Saver(database);
         this._poll = new Poll(this);
         this._cd_timer = new CDTimer(this);
+        this._deadline_timer = new DeadlineTimer(this);
         
         this._database = database;
         this._sockets = sockets;
@@ -49,6 +51,13 @@ module.exports = class Game {
         }
         this._cd_timer.begin();
         this._saver.addTimer(this._cd_timer);
+        // ---------------------------DEADLINETIMER--------------------------//
+        if(!start_new) {
+            this._database.getTimer('DeadlineTimer', (deadlinetimer_timer_json) => {
+                self._deadline_timer.setTimer(deadlinetimer_timer_json);
+            });
+        }
+        this._saver.addTimer(this._deadline_timer);
 
         this._saver.save();
     }
