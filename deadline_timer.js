@@ -1,6 +1,5 @@
 'use strict';
-const REDUCAO_BASE_DEADLINE_EM_MILISSEGUNDOS = 3233000;
-const DURACAO_JOGO_EM_DIAS = 365;
+const config = require('./configuracao.json').DeadlineTimer;
 
 module.exports = class DeadlineTimer {
     constructor(game) {
@@ -8,10 +7,10 @@ module.exports = class DeadlineTimer {
         this._game = game;
 
         this._label = 'DeadlineTimer';
-        this._current_reduction = REDUCAO_BASE_DEADLINE_EM_MILISSEGUNDOS;
+        this._current_reduction = config.DEADLINE_REDUCAO_EM_MILISSEGUNDOS;
 
         this._deadline = new Date();
-        this._deadline.setDate(this._deadline.getDate() + DURACAO_JOGO_EM_DIAS);
+        this._deadline.setDate(this._deadline.getDate() + config.DEADLINE_DURACAO_TOTAL_EM_DIAS);
     }
 
     reduce() {

@@ -1,0 +1,16 @@
+{
+    "DeadlineTimer": {
+        "DEADLINE_REDUCAO_EM_MILISSEGUNDOS": 3233000,
+        "DEADLINE_DURACAO_TOTAL_EM_DIAS": 365
+    },
+    "CDTimer": {
+        "CD_TIMER_DURACAO_EM_MILISSEGUNDOS": 15000,
+        "CD_TIMER_AMOSTRAGEM_EM_MILISSEGUNDOS": 50
+    },
+    "Saver": {
+        "SAVER_AMOSTRAGEM_EM_MILISSEGUNDOS": 100
+    },
+    "Nave": {
+        "NAVE_DEFAULT_GAS": 20
+    }
+}

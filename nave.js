@@ -1,10 +1,11 @@
 'use strict';
+const config = require('./configuracao.json').Nave;
 
 module.exports = class Nave {
     constructor() {
         console.log("Criando a nave...");
         this._altitude = 0;
-        this._gas_default = 20;
+        this._gas_default = config.NAVE_DEFAULT_GAS;
         this._gas_extra = 0;
     }
 

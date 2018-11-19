@@ -1,6 +1,5 @@
 'use strict'
-const CD_TIMER_DURACAO = 15000;
-const CD_TIMER_AMOSTRAGEM = 50;
+const config = require('./configuracao.json').CDTimer;
 
 module.exports = class CDTimer {
     constructor(game) {
@@ -9,7 +8,7 @@ module.exports = class CDTimer {
 
         this._label = 'CDTimer';
         this._tempo_restante = null;
-        this._duracao = CD_TIMER_DURACAO;
+        this._duracao = config.CD_TIMER_DURACAO_EM_MILISSEGUNDOS;
         this._reference = new Date();
     }
 
@@ -21,7 +20,7 @@ module.exports = class CDTimer {
             this._reference = new Date();
             this._game.getPoll().closePoll();
         }
-        setTimeout(this.begin.bind(this), CD_TIMER_AMOSTRAGEM);
+        setTimeout(this.begin.bind(this), config.CD_TIMER_AMOSTRAGEM_EM_MILISSEGUNDOS);
     }
 
     setTimer(cd_timer_json) {

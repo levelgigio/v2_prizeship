@@ -1,5 +1,5 @@
 'use strict'
-const SAVER_AMOSTRAGEM = 100;
+const config = require('./configuracao.json').Saver;
 
 module.exports = class Saver {
     constructor(database) {
@@ -23,7 +23,7 @@ module.exports = class Saver {
     }
     
     save() {
-        setTimeout(this._update.bind(this), SAVER_AMOSTRAGEM);
+        setTimeout(this._update.bind(this), config.SAVER_AMOSTRAGEM_EM_MILISSEGUNDOS);
     }
     
     addTimer(timer) {
