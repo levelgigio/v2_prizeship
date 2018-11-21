@@ -9,6 +9,7 @@ module.exports = class Saver {
         this._timers = [];
         this._polls = [];
         this._naves = [];
+        this._charts = [];
     }
 
     _update(callback) {
@@ -18,6 +19,8 @@ module.exports = class Saver {
             this._database.savePoll(this._polls[i].getPollJson());
         for(var i = 0; i < this._naves.length; i++) 
             this._database.saveNave(this._naves[i].getNaveJson());
+        for(var i = 0; i < this._charts.length; i++) 
+            this._database.saveChart(this._charts[i].getPontos());
             
         this.save();
     }
@@ -36,6 +39,10 @@ module.exports = class Saver {
     
     addNave(nave) {
         this._naves.push(nave);
+    }
+
+    addChart(chart) {
+        this._charts.push(chart);
     }
     
     setDatabase(database) {

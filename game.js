@@ -5,6 +5,7 @@ const Saver = require('./saver');
 const Poll = require('./poll');
 const CDTimer = require('./cd_timer');
 const DeadlineTimer = require('./deadline_timer');
+const Chart = require('./chart');
 
 module.exports = class Game {
     constructor(database, sockets) {
@@ -14,6 +15,7 @@ module.exports = class Game {
         this._poll = new Poll(this);
         this._cd_timer = new CDTimer(this);
         this._deadline_timer = new DeadlineTimer(this);
+        this._chart = new Chart(this);
         
         this._database = database;
         this._sockets = sockets;
@@ -25,6 +27,10 @@ module.exports = class Game {
 
     getPoll() {
         return this._poll;
+    }
+
+    getChart() {
+        return this._chart;
     }
 
     start(start_new) {
@@ -58,6 +64,13 @@ module.exports = class Game {
             });
         }
         this._saver.addTimer(this._deadline_timer);
+        // ---------------------------CHART--------------------------//
+        if(!start_new) {
+            this._database.getChart((chart_array) => {
+                self._chart.setChart(chart_array);
+            });
+        }
+        this._saver.addChart(this._chart);
 
         this._saver.save();
     }

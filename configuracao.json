@@ -5,12 +5,16 @@
     },
     "CDTimer": {
         "CD_TIMER_DURACAO_EM_MILISSEGUNDOS": 15000,
-        "CD_TIMER_AMOSTRAGEM_EM_MILISSEGUNDOS": 50
+        "CD_TIMER_AMOSTRAGEM_EM_MILISSEGUNDOS": 50,
+        "CD_TIMER_DIVISOES_CHART": 3
     },
     "Saver": {
         "SAVER_AMOSTRAGEM_EM_MILISSEGUNDOS": 100
     },
     "Nave": {
         "NAVE_DEFAULT_GAS": 20
+    },
+    "Chart": {
+        "CHART_MAX_PONTOS": 50
     }
 }

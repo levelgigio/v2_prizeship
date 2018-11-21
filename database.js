@@ -68,7 +68,7 @@ module.exports = class Database {
         else
             console.log("TRYING TO SAVE TO DB AN UNDEFINED POLL");
     }
-    // ------------------------------Timers-----------------------------//
+    // ------------------------------TIMERS-----------------------------//
     getTimer(label, callback) {
         this._db.db('prizeship_v2').collection('timers').findOne( { label: label }, (error, timer_json) => {
             if(error)
@@ -76,6 +76,7 @@ module.exports = class Database {
             else {
                 if(timer_json){
                     if(callback)
+                        //o json do timer ja e o proprio objeto encontrado pela db
                         callback(timer_json);                        
                     else
                         console.log("'getTimer()' NEEDS A CALLBACK --> database.js");
@@ -91,6 +92,30 @@ module.exports = class Database {
             this._db.db('prizeship_v2').collection('timers').updateOne( { label: timer_json.label }, {$set : {values : timer_json.values}}, {upsert: true});
         else
             console.log("TRYING TO SAVE TO DB AN UNDEFINED CDTIMER");
+    }
+    // ------------------------------CHART-----------------------------//
+    getChart(callback) {
+        this._db.db('prizeship_v2').collection('chart').findOne( { chart_array: {$exists: true}}, (error, chart) => {
+            if(error)
+                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getTimer()' --> database.js");
+            else {
+                if(chart){
+                    if(callback)
+                        callback(chart.chart_array);                        
+                    else
+                        console.log("'getChart()' NEEDS A CALLBACK --> database.js");
+                }
+                else
+                    console.log("CHART OBJECT NOT FOUND IN DB");
+            }
+        });
+    } 
+
+    saveChart(chart_array) {
+        if(chart_array)
+            this._db.db('prizeship_v2').collection('chart').updateOne( { chart_array: {$exists: true} }, {$set : {chart_array : chart_array}}, {upsert: true});
+        else
+            console.log("TRYING TO SAVE TO DB AN UNDEFINED CHART ARRAY");
     }
 
 }
