@@ -38,9 +38,9 @@ module.exports = class Nave {
     }
     
     setNave(nave_json) {
-        this._altitude = nave_json._altitude;
-        this._gas_default = nave_json._gas_default;
-        this._gas_extra = nave_json._gas_extra;
+        this._altitude = nave_json.altitude;
+        this._gas_default = nave_json.gas_default;
+        this._gas_extra = nave_json.gas_extra;
     }
     
 }

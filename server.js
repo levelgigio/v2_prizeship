@@ -17,5 +17,5 @@ const database = new Database();
 const game = new Game(database, io);
 
 database.connect(() => {
-    game.start(true);
+    game.start(false);
 });

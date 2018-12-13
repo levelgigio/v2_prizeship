@@ -51,6 +51,7 @@ module.exports = class Database {
                 console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getPoll()' --> database.js");
             else {
                 if(poll_json){
+                    console.log(poll_json.poll);
                     if(callback)
                         callback(poll_json.poll);                        
                     else

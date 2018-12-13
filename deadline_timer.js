@@ -18,8 +18,8 @@ module.exports = class DeadlineTimer {
      }
  
      setTimer(timer_json) {
-        this._deadline = timer_json.deadline;
-        this._current_reduction = timer_json.current_reduction;
+        this._deadline = timer_json.values.deadline;
+        this._current_reduction = timer_json.values.current_reduction;
      }
  
      getTimerJson() {

@@ -45,7 +45,7 @@ module.exports = class Game {
         // ------------------------------POOL-----------------------------//
         if(!start_new) {
             this._database.getPoll((poll_json) => {
-                self._pool.setPoll(poll_json);
+                self._poll.setPoll(poll_json);
             });
         }
         this._saver.addPoll(this._poll);
@@ -61,6 +61,7 @@ module.exports = class Game {
         if(!start_new) {
             this._database.getTimer('DeadlineTimer', (deadlinetimer_timer_json) => {
                 self._deadline_timer.setTimer(deadlinetimer_timer_json);
+                console.log("aaa ", deadlinetimer_timer_json);
             });
         }
         this._saver.addTimer(this._deadline_timer);
@@ -68,9 +69,11 @@ module.exports = class Game {
         if(!start_new) {
             this._database.getChart((chart_array) => {
                 self._chart.setChart(chart_array);
+                console.log(self._chart.getPontos());
             });
         }
         this._saver.addChart(this._chart);
+
 
         this._saver.save();
     }
