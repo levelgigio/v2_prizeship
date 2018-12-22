@@ -1,5 +1,6 @@
 'use strict';
 
+const Prize = require('./prize');
 const Nave = require('./nave');
 const Saver = require('./saver');
 const Poll = require('./poll');
@@ -10,6 +11,7 @@ const Chart = require('./chart');
 module.exports = class Game {
     constructor(database, sockets) {
         console.log("Criando o jogo...");
+        this._prize = new Prize();
         this._nave = new Nave();
         this._saver = new Saver(database);
         this._poll = new Poll(this);
@@ -35,6 +37,13 @@ module.exports = class Game {
 
     start(start_new) {
         var self = this;
+        // ------------------------------PRIZE-----------------------------//
+        if(!start_new) {
+            this._database.getPrize((prize_json) => {
+                self._prize.setPrize(prize_json);
+            });
+        }
+        this._saver.addPrize(this._prize);
         // ------------------------------NAVE-----------------------------//
         if(!start_new) {
             this._database.getNave((nave_json) => {
@@ -61,7 +70,6 @@ module.exports = class Game {
         if(!start_new) {
             this._database.getTimer('DeadlineTimer', (deadlinetimer_timer_json) => {
                 self._deadline_timer.setTimer(deadlinetimer_timer_json);
-                console.log("aaa ", deadlinetimer_timer_json);
             });
         }
         this._saver.addTimer(this._deadline_timer);
@@ -69,7 +77,6 @@ module.exports = class Game {
         if(!start_new) {
             this._database.getChart((chart_array) => {
                 self._chart.setChart(chart_array);
-                console.log(self._chart.getPontos());
             });
         }
         this._saver.addChart(this._chart);
@@ -77,5 +84,4 @@ module.exports = class Game {
 
         this._saver.save();
     }
-
 }

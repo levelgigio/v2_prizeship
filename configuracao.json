@@ -16,5 +16,9 @@
     },
     "Chart": {
         "CHART_MAX_PONTOS": 50
+    },
+    "Prize": {
+        "PP_PRICE_IN_REAIS": 2,
+        "PRIZE_RATE": 0.8
     }
 }

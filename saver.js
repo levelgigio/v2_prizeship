@@ -6,6 +6,7 @@ module.exports = class Saver {
         console.log("Criando o saver...");
         this._database = database;
 
+        this._prizes = [];
         this._timers = [];
         this._polls = [];
         this._naves = [];
@@ -21,7 +22,9 @@ module.exports = class Saver {
             this._database.saveNave(this._naves[i].getNaveJson());
         for(var i = 0; i < this._charts.length; i++) 
             this._database.saveChart(this._charts[i].getPontos());
-            
+        for(var i = 0; i < this._prizes.length; i++) 
+            this._database.savePrize(this._prizes[i].getPrizeJson());    
+
         this.save();
     }
     
@@ -43,6 +46,10 @@ module.exports = class Saver {
 
     addChart(chart) {
         this._charts.push(chart);
+    }
+
+    addPrize(prize) {
+        this._prizes.push(prize);
     }
     
     setDatabase(database) {

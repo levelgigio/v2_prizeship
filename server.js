@@ -19,3 +19,18 @@ const game = new Game(database, io);
 database.connect(() => {
     game.start(false);
 });
+
+io.sockets.on('connection', (socket) => {
+    console.log("id: ", socket.id);
+
+    socket.on('reduce-deadline', (user_json) => {
+        console.log(user_json);
+        if(user_json) {
+            database.getUser(user_json.user_id, (user) => {
+                if(user.properties.spendable.pp > 0) {
+                    
+                }
+            });
+        }
+    });
+});

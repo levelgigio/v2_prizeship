@@ -35,9 +35,6 @@ module.exports = class CDTimer {
         this._tempo_restante = cd_timer_json.values.tempo_restante;
         this._duracao = cd_timer_json.values.duration;
         this._reference = cd_timer_json.values.reference;
-        console.log("setTimer temporestante: " + this._tempo_restante);
-        console.log("setTimer duracao: " + this._duracao);
-        console.log("setTimer reference: " + this._reference);
     }
 
     getTimerJson() {

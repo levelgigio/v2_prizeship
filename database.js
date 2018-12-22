@@ -51,7 +51,6 @@ module.exports = class Database {
                 console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getPoll()' --> database.js");
             else {
                 if(poll_json){
-                    console.log(poll_json.poll);
                     if(callback)
                         callback(poll_json.poll);                        
                     else
@@ -98,7 +97,7 @@ module.exports = class Database {
     getChart(callback) {
         this._db.db('prizeship_v2').collection('chart').findOne( { chart_array: {$exists: true}}, (error, chart) => {
             if(error)
-                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getTimer()' --> database.js");
+                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getChart()' --> database.js");
             else {
                 if(chart){
                     if(callback)
@@ -118,5 +117,51 @@ module.exports = class Database {
         else
             console.log("TRYING TO SAVE TO DB AN UNDEFINED CHART ARRAY");
     }
+    // ------------------------------PRIZE-----------------------------//
+    getPrize(callback) {
+        this._db.db('prizeship_v2').collection('prize').findOne( { prize: {$exists: true}}, (error, prize) => {
+            if(error)
+                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getChart()' --> database.js");
+            else {
+                if(prize){
+                    if(callback)
+                        callback(prize.prize);                        
+                    else
+                        console.log("'getPrize()' NEEDS A CALLBACK --> database.js");
+                }
+                else
+                    console.log("PRIZE OBJECT NOT FOUND IN DB");
+            }
+        });
+    } 
 
+    savePrize(prize_json) {
+        if(prize_json)
+            this._db.db('prizeship_v2').collection('prize').updateOne( { prize: {$exists: true} }, {$set : {prize : prize_json}}, {upsert: true});
+        else
+            console.log("TRYING TO SAVE TO DB AN UNDEFINED PRIZE");
+    }
+    // ------------------------------USER-----------------------------//
+    getUser(user_id, callback) {
+        this._db.db('prizeship_v2').collection('users').findOne( { user_id: user_id }, (error, user) => {
+            if(error)
+                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getUser()' --> database.js");
+            else {
+                if(user){
+                    if(callback)
+                        callback(user);                        
+                    else
+                        console.log("'getUser()' NEEDS A CALLBACK --> database.js");
+                }
+                else
+                    console.log("USER OBJECT NOT FOUND IN DB");
+            }
+        });
+    } 
+
+    updateUserProperties(user_id, new_propeties) {
+        if(user_id && new_propeties)
+            this._db.db('prizeship_v2').collection('users').update({user_id: user_id}, {$set: {properties: new_propeties}});
+    }
+    
 }

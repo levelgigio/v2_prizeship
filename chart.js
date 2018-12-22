@@ -10,7 +10,7 @@ module.exports = class Chart {
     }
 
     createPonto() {
-        console.log("ponto");
+        //console.log("ponto");
         this._pontos.unshift({
             altitude: this._game.getNave().getAltitude(),
             date: new Date()
