@@ -11,13 +11,25 @@ module.exports = class Poll {
     }
 
     subir(quant) {
-        this._subir += quant;
-        this._ip_spent += quant;
+        if(quant) {
+            this._subir += quant;
+            this._ip_spent += quant;
+        }
+        else {
+            this._subir++;
+            this._ip_spent++;
+        }
     }
 
     descer(quant) {
-        this._descer += quant;
-        this._ip_spent += quant;
+        if(quant) {
+            this._descer += quant;
+            this._ip_spent += quant;
+        }
+        else {
+            this._descer++;
+            this._ip_spent++;
+        }
     }
 
     setPoll(poll_json) {

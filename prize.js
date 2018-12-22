@@ -10,16 +10,25 @@ module.exports = class Prize {
         this._total_ip_spent = 0;
     }
 
-    bought(quant) {
-        this._total_pp_bought+=quant;
+    boughtPP(quant) {
+        if(quant)
+            this._total_pp_bought+=quant;
+        else
+            this._total_pp_bought++;
     }
 
     spentPP(quant) {
-        this._total_pp_spent+=quant;
+        if(quant)
+            this._total_pp_spent+=quant;
+        else
+            this._total_pp_spent++;
     }
 
     spentIP(quant) {
-        this._total_ip_spent+=quant;
+        if(quant)
+            this._total_ip_spent+=quant;
+        else
+            this._total_ip_spent++;
     }
 
     getPrizeInReais() {
@@ -29,7 +38,7 @@ module.exports = class Prize {
     getPrizeJson() {
         return {
             pp_bought: this._total_pp_bought,
-            pp_spent: this._total_ip_spent,
+            pp_spent: this._total_pp_spent,
             ip_spent: this._total_ip_spent
         };
     }

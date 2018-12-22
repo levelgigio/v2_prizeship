@@ -19,6 +19,7 @@
     },
     "Prize": {
         "PP_PRICE_IN_REAIS": 2,
+        "PP_IN_IP": 10,
         "PRIZE_RATE": 0.8
     }
 }

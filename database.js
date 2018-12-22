@@ -159,9 +159,9 @@ module.exports = class Database {
         });
     } 
 
-    updateUserProperties(user_id, new_propeties) {
-        if(user_id && new_propeties)
-            this._db.db('prizeship_v2').collection('users').update({user_id: user_id}, {$set: {properties: new_propeties}});
+    updateUserProperties(user_json) {
+        if(user_json)
+            this._db.db('prizeship_v2').collection('users').updateOne({user_id: user_json.user_id}, {$set: {properties: user_json.properties}});
     }
     
 }

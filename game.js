@@ -35,6 +35,18 @@ module.exports = class Game {
         return this._chart;
     }
 
+    getDeadlineTimer() {
+        return this._deadline_timer;
+    }
+
+    getPrize() {
+        return this._prize;
+    }
+
+    getDatabase() {
+        return this._database;
+    }
+
     start(start_new) {
         var self = this;
         // ------------------------------PRIZE-----------------------------//
