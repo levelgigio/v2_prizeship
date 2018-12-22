@@ -20,29 +20,29 @@ module.exports = class Database {
             }    
         });
     }
-    // ------------------------------NAVE-----------------------------//
-    getNave(callback) {
-        this._db.db('prizeship_v2').collection('nave').findOne( { nave: {$exists: true} }, (error, nave_json) => {
+    // ------------------------------WHEEL-----------------------------//
+    getWheel(callback) {
+        this._db.db('prizeship_v2').collection('wheel').findOne( { wheel: {$exists: true} }, (error, wheel_json) => {
             if (error)
-                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getNave()' --> database.js");
+                console.log("ERRO NA CHAMADA DE 'findOne()' EM 'getWheel()' --> database.js");
             else {
-                if(nave_json){
+                if(wheel_json){
                     if(callback)
-                        callback(nave_json.nave);
+                        callback(wheel_json.wheel);
                     else
-                        console.log("'getNave()' NEEDS A CALLBACK --> database.js");
+                        console.log("'getWheel()' NEEDS A CALLBACK --> database.js");
                 }
                 else
-                    console.log("NAVE OBJECT NOT FOUND IN DB");
+                    console.log("WHEEL OBJECT NOT FOUND IN DB");
             }
         });
     }
 
-    saveNave(nave_json) {
-        if(nave_json)
-            this._db.db('prizeship_v2').collection('nave').updateOne( { nave: {$exists: true}}, {$set : {nave: nave_json}}, {upsert: true});
+    saveWheel(wheel_json) {
+        if(wheel_json)
+            this._db.db('prizeship_v2').collection('wheel').updateOne( { wheel: {$exists: true}}, {$set : {wheel: wheel_json}}, {upsert: true});
         else
-            console.log("TRYING TO SAVE TO DB AN UNDEFINED NAVE");
+            console.log("TRYING TO SAVE TO DB AN UNDEFINED WHEEL");
     }
     // ------------------------------POOL-----------------------------//
     getPoll(callback) {

@@ -18,7 +18,7 @@ const database = new Database();
 const game = new Game(database, io);
 
 database.connect(() => {
-    game.start(false);
+    game.start(true);
 });
 
 io.sockets.on('connection', (socket) => {
@@ -45,12 +45,12 @@ io.sockets.on('connection', (socket) => {
                     user.setUser(user_json);
                     user.spentIP();
 
-                    switch(app_json.voto) {
-                    case "SUBIR":
-                        game.getPoll().subir();
+                    switch(app_json.vote) {
+                    case "CLOCKWISE":
+                        game.getPoll().rotateClockwise();
                         break;
-                    case "DESCER":
-                        game.getPoll().descer();
+                    case "COUNTERCLOCKWISE":
+                        game.getPoll().rotateCounterclockwise();
                         break;
                     }
                 }

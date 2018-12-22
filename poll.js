@@ -1,64 +1,65 @@
 'use strict';
+const config = require('./configuracao.json').Poll;
 
 module.exports = class Poll {
     constructor(game) {
         console.log("Criando a poll...");
         this._game = game;
 
-        this._subir = 0;
-        this._descer = 0;
+        this._clockwise = 0;
+        this._counterclockwise = 0;
         this._ip_spent = 0;
     }
 
-    subir(quant) {
+    rotateClockwise(quant) {
         if(quant) {
-            this._subir += quant;
+            this._clockwise += quant;
             this._ip_spent += quant;
         }
         else {
-            this._subir++;
+            this._clockwise++;
             this._ip_spent++;
         }
     }
 
-    descer(quant) {
+    rotateCounterclockwise(quant) {
         if(quant) {
-            this._descer += quant;
+            this._counterclockwise += quant;
             this._ip_spent += quant;
         }
         else {
-            this._descer++;
+            this._counterclockwise++;
             this._ip_spent++;
         }
     }
 
     setPoll(poll_json) {
-        this._subir = poll_json.subir;
-        this._descer = poll_json.descer;
+        this._clockwise = poll_json.clockwise;
+        this._counterclockwise = poll_json.counterclockwise;
         this._ip_spent = poll_json.ip_spent;
     }
 
     getPollJson() {
         return {
-            subir: this._subir,
-            descer: this._descer,
+            clockwise: this._clockwise,
+            counterclockwise: this._counterclockwise,
             ip_spent: this._ip_spent,
         };
     }
 
     closePoll() {
-        if (this._subir > this._descer)
-            this._game.getNave().subir();
+        if (this._clockwise > this._counterclockwise)
+            this._game.getWheel().rotateClockwise();
 
-        else if ( this._subir < this._descer ) 
-            this._game.getNave().descer();
+        else if ( this._clockwise < this._counterclockwise ) 
+            this._game.getWheel().rotateCounterclockwise();
         
         this._reset();
     }
 
     _reset() {
-        this._subir = 0;
-        this._descer = 0;
+        this._clockwise = 0;
+        this._counterclockwise = 0;
         this._ip_spent = 0;
     }
 }

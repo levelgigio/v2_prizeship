@@ -1,4 +1,7 @@
 {
+    "Poll": {
+        "POLL_DEFAULT_DURATION_IN_MS": 30000
+    },
     "DeadlineTimer": {
         "DEADLINE_REDUCAO_EM_MILISSEGUNDOS": 3233000,
         "DEADLINE_DURACAO_TOTAL_EM_DIAS": 365
@@ -11,8 +14,10 @@
     "Saver": {
         "SAVER_AMOSTRAGEM_EM_MILISSEGUNDOS": 100
     },
-    "Nave": {
-        "NAVE_DEFAULT_GAS": 20
+    "Wheel": {
+        "WHEEL_DIVISIONS": 64,
+        "WHEEL_DEFAULT_WEIGHT": 10,
+        "WHEEL_MIN_WEIGHT": 5
     },
     "Chart": {
         "CHART_MAX_PONTOS": 50

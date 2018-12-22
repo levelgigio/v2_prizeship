@@ -12,7 +12,7 @@ module.exports = class Chart {
     createPonto() {
         //console.log("ponto");
         this._pontos.unshift({
-            altitude: this._game.getNave().getAltitude(),
+            position: this._game.getWheel().getPosition(),
             date: new Date()
         });
         if(this._pontos.length > config.CHART_MAX_PONTOS)

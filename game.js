@@ -1,7 +1,7 @@
 'use strict';
 
 const Prize = require('./prize');
-const Nave = require('./nave');
+const Wheel = require('./wheel');
 const Saver = require('./saver');
 const Poll = require('./poll');
 const CDTimer = require('./cd_timer');
@@ -12,7 +12,7 @@ module.exports = class Game {
     constructor(database, sockets) {
         console.log("Criando o jogo...");
         this._prize = new Prize();
-        this._nave = new Nave();
+        this._wheel = new Wheel();
         this._saver = new Saver(database);
         this._poll = new Poll(this);
         this._cd_timer = new CDTimer(this);
@@ -23,8 +23,8 @@ module.exports = class Game {
         this._sockets = sockets;
     }
 
-    getNave() {
-        return this._nave;
+    getWheel() {
+        return this._wheel;
     }
 
     getPoll() {
@@ -56,13 +56,13 @@ module.exports = class Game {
             });
         }
         this._saver.addPrize(this._prize);
-        // ------------------------------NAVE-----------------------------//
+        // ------------------------------WHEEL-----------------------------//
         if(!start_new) {
-            this._database.getNave((nave_json) => {
-                self._nave.setNave(nave_json);
+            this._database.getWheel((wheel_json) => {
+                self._wheel.setWheel(wheel_json);
             });
         }
-        this._saver.addNave(this._nave);
+        this._saver.addWheel(this._wheel);
         // ------------------------------POOL-----------------------------//
         if(!start_new) {
             this._database.getPoll((poll_json) => {

@@ -9,17 +9,17 @@ module.exports = class Saver {
         this._prizes = [];
         this._timers = [];
         this._polls = [];
-        this._naves = [];
+        this._wheels = [];
         this._charts = [];
     }
 
-    _update(callback) {
+    _update() {
         for(var i = 0; i < this._timers.length; i++) 
             this._database.saveTimer(this._timers[i].getTimerJson());
         for(var i = 0; i < this._polls.length; i++) 
             this._database.savePoll(this._polls[i].getPollJson());
-        for(var i = 0; i < this._naves.length; i++) 
-            this._database.saveNave(this._naves[i].getNaveJson());
+        for(var i = 0; i < this._wheels.length; i++) 
+            this._database.saveWheel(this._wheels[i].getWheelJson());
         for(var i = 0; i < this._charts.length; i++) 
             this._database.saveChart(this._charts[i].getPontos());
         for(var i = 0; i < this._prizes.length; i++) 
@@ -40,8 +40,8 @@ module.exports = class Saver {
         this._polls.push(poll);
     }
     
-    addNave(nave) {
-        this._naves.push(nave);
+    addWheel(wheel) {
+        this._wheels.push(wheel);
     }
 
     addChart(chart) {
