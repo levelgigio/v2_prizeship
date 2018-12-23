@@ -23,14 +23,14 @@ database.connect(() => {
 
 io.sockets.on('connection', (socket) => {
     console.log("id: ", socket.id);
+    var userInterface = new User(game);
 
     socket.on('reduce-deadline', (app_json) => {
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.pp > 0) {
-                    let user = new User(game);
-                    user.setUser(user_json);
-                    user.spentPP();
+                    ususerInterfaceer.setUser(user_json);
+                    userInterface.spentPP(user_json.quant);
                     game.getDeadlineTimer().reduce();
                 }
             });
@@ -41,9 +41,8 @@ io.sockets.on('connection', (socket) => {
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.ip > 0) {
-                    let user = new User(game);
-                    user.setUser(user_json);
-                    user.spentIP();
+                    userInterface.setUser(user_json);
+                    userInterface.spentIP(user_json.quant);
 
                     switch(app_json.vote) {
                     case "CLOCKWISE":
@@ -62,9 +61,24 @@ io.sockets.on('connection', (socket) => {
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.pp > 0) {
-                    let user = new User(game);
-                    user.setUser(user_json);
-                    user.splitPP();
+                    userInterface.setUser(user_json);
+                    userInterface.splitPP(user_json.quant);
+                }
+            });
+        }
+    });
+
+    socket.on('change-weight', (app_json) => {
+        if(app_json) {
+            database.getUser(app_json.user_id, (user_json) => {
+                if(user_json.properties.spendable.ip > 0) {
+                    userInterface.setUser(user_json);
+                    userInterface.spentIP(user_json.quant);
+                    if(userInterface.canChangeWeight()) {
+                        console.log("ADICIONOU");
+                        game.getWheel().addWeight(app_json);
+                        userInterface.changeWeight(app_json.position);
+                    }
                 }
             });
         }
@@ -74,7 +88,7 @@ io.sockets.on('connection', (socket) => {
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.pp > 0) {
-
+                    userInterface.setUser(user_json);
                 }
             });
         }

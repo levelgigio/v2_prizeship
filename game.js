@@ -47,6 +47,10 @@ module.exports = class Game {
         return this._database;
     }
 
+    getCDTimer() {
+        return this._cd_timer;
+    }
+
     start(start_new) {
         var self = this;
         // ------------------------------PRIZE-----------------------------//

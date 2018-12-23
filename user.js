@@ -1,6 +1,7 @@
 'use strict';
 const config = require('./configuracao.json').User;
 const prizeConfig = require('./configuracao.json').Prize;
+const CDTimerConfig = require('./configuracao.json').CDTimer;
 
 module.exports = class User {
     constructor(game) {
@@ -20,6 +21,8 @@ module.exports = class User {
             min: 0,
             max: 0,
         };
+        this._weight_position = null;
+        this._weight_reference_date = null;
     }
 
     spentIP(quant) {
@@ -63,6 +66,22 @@ module.exports = class User {
         this._game.getDatabase().updateUserProperties(this.getUserJson());
     }
 
+    canChangeWeight() {
+        let date = new Date(this._game.getCDTimer().getTimerJson().values.reference);
+        if(this._weight_reference_date) {
+            if(date.getTime() > this._weight_reference_date.getTime())
+                return true;
+        }
+        else
+            return true;
+    }
+
+    changeWeight(position) {
+        this._weight_reference_date = new Date();
+        this._weight_position = position;
+        this._game.getDatabase().updateUserProperties(this.getUserJson());
+    }
+
     setUser(user_json) {
         this._user_id = user_json.user_id;
         this._ip = user_json.properties.spendable.ip;
@@ -71,6 +90,8 @@ module.exports = class User {
         this._pp_spent = user_json.properties.spent.pp;
         this._final_guess = user_json.properties.guesses.final_guess;
         this._daily_guess = user_json.properties.guesses.daily_guess;
+        this._weight_position = user_json.properties.weight.position;
+        this._weight_reference_date = user_json.properties.weight.reference_date;
     }
 
     getUserJson() {
@@ -88,7 +109,11 @@ module.exports = class User {
                 guesses: {
                     final_guess: this._final_guess,
                     daily_guess: this._daily_guess,
-                }
+                },
+                weight: {
+                    position: this._weight_position,
+                    reference_date: this._weight_reference_date,
+                },
             }
         };
     }
