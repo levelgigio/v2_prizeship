@@ -15,7 +15,7 @@ module.exports = class CDTimer {
     }
 
     begin() {
-        console.log(this._tempo_restante);
+        //console.log(this._tempo_restante);
         var now = new Date().getTime();
         this._tempo_restante = this._duracao + this._reference.getTime() - now;            
 

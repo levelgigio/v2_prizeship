@@ -1,0 +1,17 @@
+PRIZESHIP
+
+- aumentar o deadline pra cada primeira compra de cada conta
+
+- nave
+
+- controle da nave por steering
+
+- palpite final pro deadline
+- apostar pp votando pra daqui a poucos dias, em troca de ip
+- palpite semanal em troca de refund de ip 
+
+ENTREGA DE PREMIO FINAL
+
+- baseada na distancia da aposta (50%)
+- baseada em quanto comprou de pp (25%)
+- baseada em quanto gastou de ip (25%)

@@ -26,10 +26,11 @@ io.sockets.on('connection', (socket) => {
     var userInterface = new User(game);
 
     socket.on('reduce-deadline', (app_json) => {
+        console.log(app_json);
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.pp > 0) {
-                    ususerInterfaceer.setUser(user_json);
+                    userInterface.setUser(user_json);
                     userInterface.spentPP(user_json.quant);
                     game.getDeadlineTimer().reduce();
                 }
@@ -38,6 +39,7 @@ io.sockets.on('connection', (socket) => {
     });
 
     socket.on('vote', (app_json) => {
+        console.log(app_json);
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.ip > 0) {
@@ -58,6 +60,7 @@ io.sockets.on('connection', (socket) => {
     });
 
     socket.on('split-pp', (app_json) => {
+        console.log(app_json);
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.pp > 0) {
@@ -69,6 +72,7 @@ io.sockets.on('connection', (socket) => {
     });
 
     socket.on('change-weight', (app_json) => {
+        console.log(app_json);
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.ip > 0) {
@@ -76,7 +80,7 @@ io.sockets.on('connection', (socket) => {
                     userInterface.spentIP(user_json.quant);
                     if(userInterface.canChangeWeight()) {
                         console.log("ADICIONOU");
-                        game.getWheel().addWeight(app_json);
+                        game.getWheel().addWeight(app_json.position, app_json.quant);
                         userInterface.changeWeight(app_json.position);
                     }
                 }
@@ -84,7 +88,8 @@ io.sockets.on('connection', (socket) => {
         }
     });
 
-    socket.on('vote', (app_json) => {
+    socket.on('aaaa', (app_json) => {
+        console.log(app_json);
         if(app_json) {
             database.getUser(app_json.user_id, (user_json) => {
                 if(user_json.properties.spendable.pp > 0) {

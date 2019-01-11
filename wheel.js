@@ -45,8 +45,8 @@ module.exports = class Wheel {
         this._interval = setInterval(this._rotateCounterclockwise.bind(this), 1000);
     }
     
-    addWeight(app_json) {
-        this._weights[app_json.position] += app_json.quant;
+    addWeight(position, quant) {
+        this._weights[position] += quant;
     }
 
     getPosition() {
